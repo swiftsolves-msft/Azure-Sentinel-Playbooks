@@ -3,10 +3,10 @@ author: Nathan Swift
 
 This playbook will close the Sentinel incident and will also dismiss the corresponding Azure Security Center alert
 
-<a href="https://azuredeploy.net/?repository=https://github.com/Azure/Azure-Sentinel/blob/master/Playbooks/Close-Incident-ASCAlert" target="_blank">
+<a href="https://azuredeploy.net/?repository=https://github.com/swiftsolves-msft/Azure-Sentinel-Playbooks/master/Close-Incident-ASCAlert" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
-<a href="https://portal.azure.us/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Sentinel%2Fmaster%2FPlaybooks%2FClose-Incident-ASCAlert%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.us/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fswiftsolves-msft%2FAzure-Sentinel-Playbooks%2Fmaster%2FPlaybooks%2FClose-Incident-ASCAlert%2Fazuredeploy.json" target="_blank">
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazuregov.png"/>
 </a>
 
