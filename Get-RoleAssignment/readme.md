@@ -1,4 +1,4 @@
-# Notify-ASCAlertAzureResource
+# Get-RoleAssignment
 author: Nathan Swift
 
 This playbook will work with 'RBAC Role Assignment' Azure Sentinel Analytic Rule. It will contextualize the Operation 'Microsoft.Authorization/roleAssignments/write' and add in the object that assigment was granted to and the role name. It will then send an email to the team handling compliance, security and/or identity. 

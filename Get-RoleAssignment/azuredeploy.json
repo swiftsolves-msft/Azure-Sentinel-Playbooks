@@ -7,7 +7,7 @@
     },
     "parameters": {
         "PlaybookName": {
-            "defaultValue": "Notify-ASCAlertAzureResource",
+            "defaultValue": "Get-RoleAssignment",
             "type": "String"
         },
         "UserName": {
