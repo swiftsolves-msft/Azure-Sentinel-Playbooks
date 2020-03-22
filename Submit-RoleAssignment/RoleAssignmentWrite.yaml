@@ -1,0 +1,24 @@
+id: cb64eb34-db14-490e-9997-e93b9c3a4a19
+name: RBAC Role Assignment
+description: |
+  'This query looks for new role assignments that occured in a subscription. 
+   For example this monitors for the operation name 'Microsoft.Authorization/roleAssignments/write' which is used for creating role assignments'
+severity: Informational
+requiredDataConnectors:
+  - connectorId: AzureActivity
+    dataTypes:
+      - AzureActivity
+queryFrequency: 5m
+queryPeriod: 5m
+triggerOperator: gt
+triggerThreshold: 0
+tactics:
+  - PrivilegeEscalation
+relevantTechniques:
+query: |
+ 
+  AzureActivity
+  | where OperationNameValue contains "Microsoft.Authorization/roleAssignments/write"
+  | where ActivitySubstatusValue == "Created"
+  | where ActivityStatusValue == "Success"
+  | extend timestamp = EventSubmissionTimestamp, AccountCustomEntity = Caller, IPCustomEntity = CallerIpAddress, URLCustomEntity = _ResourceId 
