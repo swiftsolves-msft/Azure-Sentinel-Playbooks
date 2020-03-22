@@ -223,6 +223,18 @@
                                 "uri": "https://graph.windows.net/@{parameters('AADTenant')}/getObjectsByObjectIds?api-version=1.6 "
                             }
                         },
+                        "HTTP_4": {
+                            "runAfter": {
+                                "Switch_2": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Http",
+                            "inputs": {
+                                "method": "GET",
+                                "uri": "http://ip-api.com/json/@{variables('ipaddress')}"
+                            }
+                        },
                         "Initialize_variable": {
                             "runAfter": {},
                             "type": "InitializeVariable",
@@ -503,14 +515,14 @@
                         },
                         "Send_an_email_(V2)": {
                             "runAfter": {
-                                "Switch_2": [
+                                "HTTP_4": [
                                     "Succeeded"
                                 ]
                             },
                             "type": "ApiConnection",
                             "inputs": {
                                 "body": {
-                                    "Body": "<p>Role Assignment Write Occured:<br>\n<br>\nInitiatedBy: @{variables('caller')}<br>\nFrom IP: @{variables('ipaddress')}<br>\n<br>\nObject: &nbsp;@{body('HTTP_3')?['value'][0]?['displayName']}<br>\nObjectType: @{body('HTTP_3')?['value'][0]?['objectType']}<br>\nObjectLink: @{variables('aadobjectlink')}<br>\n<br>\nUserPrincipalName: @{variables('UPN')}<br>\n<br>\nRole: @{body('Parse_JSON_3')?['properties']?['roleName']}<br>\nRoleLink: @{parameters('rolesurl')}@{toLower(replace(body('Parse_JSON_3')?['properties']?['roleName'], ' ', '-'))}<br>\n<br>\nScope: @{body('Parse_JSON_2')?['properties']?['scope']}<br>\n</p>",
+                                    "Body": "<p>Role Assignment Write Occured:<br>\n<br>\nInitiatedBy: @{variables('caller')}<br>\nFrom IP: @{variables('ipaddress')}<br>\nCountry: @{body('HTTP_4')?['countryCode']}<br>\n &nbsp;&nbsp;Region: @{body('HTTP_4')?['regionName']}<br>\n &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;City: @{body('HTTP_4')?['city']}<br>\nISP: @{body('HTTP_4')?['isp']}<br>\n<br>\nObject: &nbsp;@{body('HTTP_3')?['value'][0]?['displayName']}<br>\nObjectType: @{body('HTTP_3')?['value'][0]?['objectType']}<br>\nObjectLink: @{variables('aadobjectlink')}<br>\n<br>\nUserPrincipalName: @{variables('UPN')}<br>\n<br>\nRole: @{body('Parse_JSON_3')?['properties']?['roleName']}<br>\nRoleLink: @{parameters('rolesurl')}@{toLower(replace(body('Parse_JSON_3')?['properties']?['roleName'], ' ', '-'))}<br>\n<br>\nScope: @{body('Parse_JSON_2')?['properties']?['scope']}<br>\n</p>",
                                     "Importance": "High",
                                     "Subject": "Role Assignment Write Detected by @{variables('caller')} on @{body('HTTP_3')?['value'][0]?['displayName']}",
                                     "To": "@parameters('EmailContact')"
