@@ -54,6 +54,10 @@
             "tags": {
                 "LogicAppsCategory": "security"
             },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/connections', variables('AzureSentinelConnectionName'))]",
+                "[resourceId('Microsoft.Web/connections', variables('azureloganalyticsdatacollectorConnectionName'))]"
+            ],
             "properties": {
                 "state": "Enabled",
                 "definition": {
