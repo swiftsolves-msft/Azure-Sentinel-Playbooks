@@ -12,4 +12,6 @@ This Logic App connector will act as a Webhook listener, Prisma can then send an
 
 **Additional Post Install Notes:**
 
+Ensure to authorize the AzureLogAnalyticsDataCollector API by giving it the Azure Sentinel LogAnalytics Workspace ID and Key
+
 Prisma configuration can be found: https://docs.paloaltonetworks.com/prisma/prisma-cloud/prisma-cloud-admin/configure-external-integrations-on-prisma-cloud/integrate-prisma-cloud-with-webhooks.html
