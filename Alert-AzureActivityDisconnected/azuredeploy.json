@@ -24,7 +24,7 @@
             "location": "Global",
             "properties": {
                 "scopes": [
-                    "[concat(parameters('logAnalyticsResourceID'), '/datasources/ce8b1d37b35640228b154efee7364088')]"
+                    "[concat(parameters('logAnalyticsResourceID'), '/datasources')]"
                 ],
                 "condition": {
                     "allOf": [
