@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "logAlertName": {
+            "defaultValue": "Connector Deleted",
+            "type": "String"
+        },
+        "logAnalyticsResourceID": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Log Analytics Resource ID",
+                "description": "A string with the Log Analytics Resource id for the flowlogs to be sent to. It will be used for deployment purposes only. The format must be: '/subscriptions/{subscription id}/resourceGroups/{resourceGroup name}/providers/microsoft.operationalinsights/workspaces/{Log Analytics Workspace name}"
+            },
+            "defaultValue": "/subscriptions/SUBIDHERE/resourceGroups/RGNAMEHERE/providers/Microsoft.OperationalInsights/workspaces/LAWORKSPACENAMEHERE"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "microsoft.insights/activityLogAlerts",
+            "apiVersion": "2017-04-01",
+            "name": "[parameters('logAlertName')]",
+            "location": "Global",
+            "properties": {
+                "scopes": [
+                    "[concat(parameters('logAnalyticsResourceID'), '/datasources/ce8b1d37b35640228b154efee7364088')]"
+                ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.OperationalInsights/workspaces/datasources/delete"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        },
+                        {
+                            "field": "status",
+                            "equals": "Started"
+                        }
+                    ]
+                },
+                "actions": {
+                    "actionGroups": []
+                },
+                "enabled": true,
+                "description": "A Azure Sentinel Connector was Deleted"
+            }
+        }
+    ]
+}
