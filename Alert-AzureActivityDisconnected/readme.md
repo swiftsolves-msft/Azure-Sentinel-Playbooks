@@ -1,33 +1,15 @@
-# Ask-Remove-MalwareBlob
+# Alert-AzureActivityDisconnected
 author: Nathan Swift
 
-This playbook will send an email asking for approval, upon approval the playbook will remove the blob from storage account and container that was alerted in ASC. Be sure to turn on Storage Account Soft Delete to recover blobs if needed.
+This will deploy a Azure Monitor Alert for AzureActivity Logs being disconnected from Azure Sentinel or Log Analytics Workspace. This could be indicative of an early attack stage and should be investigated immeaditly. Be sure after deployment to go to the alert in Azure Monitor and create and attach a Action Group so that you are notified when this occurs. The Caller and Callers IPAddr should also be caputred in the alert and ActivityLogs for review.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Security-Center%2Fmaster%2FWorkflow%2520automation%2FAsk-Remove-MalwareBlob%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fswiftsolves-msft%2FAzure-Sentinel-Playbooks%2Fmaster%2FAlert-AzureActivityDisconnected%2Fazuredeploy.json" target="_blank">
     <img src="https://aka.ms/deploytoazurebutton"/>
 </a>
-<a href="https://portal.azure.us/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Security-Center%2Fmaster%2FWorkflow%2520automation%2FAsk-Remove-MalwareBlob%2Fus%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.us/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fswiftsolves-msft%2FAzure-Sentinel-Playbooks%2Fmaster%2FAlert-AzureActivityDisconnected%2Fazuredeploy.json" target="_blank">
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazuregov.png"/>
 </a>
 
 **Additional Post Install Notes:**
 
-After deployment go to the Logic App and API Connections Blade to authorize the o365 API Connection so that email will send.
-
-<img src="https://github.com/Azure/Azure-Security-Center/blob/master/Workflow%20automation/Ask-Remove-MalwareBlob/images/apiauth.png"/>
-
-<img src="https://github.com/Azure/Azure-Security-Center/blob/master/Workflow%20automation/Ask-Remove-MalwareBlob/images/apiauth2.png"/>
-
-The Logic App creates and uses a Managed System Identity (MSI) to DELETE against the blob uri. 
-
-Assign RBAC 'Storage Blob Data Contributor' and 'Security Admin' role to the Logic App at the root Management Group level or Subscription.
-
-<img src="https://github.com/Azure/Azure-Security-Center/blob/master/Workflow%20automation/Ask-Remove-MalwareBlob/images/roleassign.png"/>
-
-<img src="https://github.com/Azure/Azure-Security-Center/blob/master/Workflow%20automation/Ask-Remove-MalwareBlob/images/roleassign2.png"/>
-
-To finish in Azure Security Center go to the Workflow Automation Blade and add a new Workflow Automation
-
-<img src="https://github.com/Azure/Azure-Security-Center/blob/master/Workflow%20automation/Ask-Remove-MalwareBlob/images/ascwfa.png"/>
-
-<img src="https://github.com/Azure/Azure-Security-Center/blob/master/Workflow%20automation/Ask-Remove-MalwareBlob/images/ascwfa2.png"/>
+After deployment go to the Alert in Azure Monitor and create and attach a Action Group for notification.
